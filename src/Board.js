@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import Cell from './Cell'
+import Cell from './Cell';
+import './Board.css'
 
 const CELL_SIZE = 100;
 const CELL_MARGIN = 2;
-const WIDTH = 100;
-const HEIGHT = 100;
+const WIDTH = 5;
+const HEIGHT = 5;
 
 
 class Board extends Component {
     constructor(props) {
         super(props);
-        
+        this.handleRestart = this.handleRestart.bind(this);
         this.state = { board: this.makeStarterBoard() };
     }
 
@@ -31,6 +32,12 @@ class Board extends Component {
             board.push(row);
         }
         return board;
+    }
+
+    handleRestart() {
+        let newBoard = this.makeStarterBoard();
+
+        this.setState( {board: newBoard} );
     }
 
     handleClick(location) {
@@ -71,6 +78,7 @@ class Board extends Component {
                 )
             })
             }
+            <button className="restart-btn" onClick={this.handleRestart}>Restart Game</button>
         </div>
     }
 }
